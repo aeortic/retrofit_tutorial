@@ -6,6 +6,7 @@ Uses http://jsonplaceholder.typicode.com/ for the rest API emulation
 
 The new files will be placed in this structure:
 
+```
 Project
 ├- adapter
 |   └ CustomAdapter
@@ -19,15 +20,17 @@ Project
 
 Res
 └ custom_row.xml
-
+```
 
 The following libraries will be used:
+```
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+```
 
 The ideal order of commits would look like this list:
 1. Add libraries
