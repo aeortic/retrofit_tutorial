@@ -7,19 +7,19 @@ Uses http://jsonplaceholder.typicode.com/ for the rest API emulation
 The new files will be placed in this structure:
 
 ```
-Project
-├- adapter
-|   └ CustomAdapter
-|
-├- model
-|   └ RetroPhoto
-|
-├- network
-    ├ GetDataService (interface)
-    └ RetrofitClientInstance
+.
+└── Project/
+    ├── adapter/
+    │   └── CustomAdapter
+    ├── model/
+    │   └── RetroPhoto
+    └── network/
+        ├── GetDataService (interface)
+        └── RetrofitClientInstance
 
-Res
-└ custom_row.xml
+.
+└── Res/
+    └── custom_row.xml
 ```
 
 The following libraries will be used:
