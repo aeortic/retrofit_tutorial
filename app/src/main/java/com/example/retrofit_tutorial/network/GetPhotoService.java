@@ -7,8 +7,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface GetDataService {
+public interface GetPhotoService {
 
-    @GET("/photos")
+    @GET("/photo")
     Call<List<RetroPhoto>>  getAllPhotos();
 }

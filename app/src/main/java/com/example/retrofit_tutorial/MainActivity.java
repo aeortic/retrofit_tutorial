@@ -1,4 +1,4 @@
-package com.example.retrofit_practice_1;
+package com.example.retrofit_tutorial;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.retrofit_tutorial.R;
 import com.example.retrofit_tutorial.adapter.CustomAdapter;
+import com.example.retrofit_tutorial.model.MovieDatabase;
 import com.example.retrofit_tutorial.model.RetroPhoto;
-import com.example.retrofit_tutorial.network.GetDataService;
-import com.example.retrofit_tutorial.network.RetrofitClientInstance;
+import com.example.retrofit_tutorial.network.GetMovieService;
+import com.example.retrofit_tutorial.network.GetPhotoService;
+import com.example.retrofit_tutorial.network.RetrofitMovieInstance;
+import com.example.retrofit_tutorial.network.RetrofitPhotoInstance;
 
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Call<List<RetroPhoto>> call;
 
+//    private Call<MovieDatabase> call;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         /* Create handler for the Retrofit interface */
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        GetPhotoService service = RetrofitPhotoInstance.getRetrofitInstance().create(GetPhotoService.class);
         call = service.getAllPhotos();
+
+//        GetMovieService service = RetrofitMovieInstance.getRetrofitInstance().create(GetMovieService.class);
+//        call = service.getSmallDataSet();
 
         /* In this naive example, the onCreate() lifecycle method is used for the sake of berevity.
          * However, in a real-world application, the activity will likely not be the only screen
@@ -52,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<RetroPhoto>> call, Response<List<RetroPhoto>> response) {
                 progressBar.setVisibility(View.INVISIBLE);
                 /* generate the list here */
-                generateDataList(response.body());
+//                generateDataList(response.body());
+                Toast.makeText(MainActivity.this, "All is well", Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -61,7 +69,25 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
+
+//        call.enqueue(new Callback<MovieDatabase>() {
+//            @Override
+//            public void onResponse(Call<MovieDatabase> call, Response<MovieDatabase> response) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//                /* generate the list here */
+//                generateDataList(response.body());
+//                toastActorId(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MovieDatabase> call, Throwable t) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT);
+//            }
+//        });
     }
+
+
 
     private void generateDataList(List<RetroPhoto> photoList) {
         recyclerView = findViewById(R.id.customRecyclerView);
@@ -70,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
+//    private void toastActorId(MovieDatabase dataset) {
+//        Integer baconId = dataset.getActors().get("Kevin Bacon");
+//        Toast.makeText(MainActivity.this, baconId, Toast.LENGTH_SHORT);
+//    }
 
     @Override
     protected void onDestroy() {
